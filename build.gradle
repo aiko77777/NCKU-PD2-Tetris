@@ -23,6 +23,8 @@ repositories {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
+	testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 tasks.withType(JavaCompile) {
@@ -31,4 +33,15 @@ tasks.withType(JavaCompile) {
 
 application {
     mainClass = 'com.PD2.Tetris.App.Tetris'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "failed", "passed", "skipped"
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+    }
 }
