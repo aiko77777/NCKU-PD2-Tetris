@@ -71,7 +71,13 @@ public abstract class Tetromino {
 	public abstract BufferedImage getImage();
 
 	public int[][] getBlockPositions() {
-		return stateList[rotateTime % stateList.length];
+		int[][] temp = stateList[rotateTime % stateList.length];
+		int[][] result = new int[4][2];
+		for (int i = 0;i < 4;i++) {
+			result[i][0] = center.getX() + temp[i][0];
+			result[i][1] = center.getY() + temp[i][1];
+		}
+		return result;
 	}
 
 	@Override
