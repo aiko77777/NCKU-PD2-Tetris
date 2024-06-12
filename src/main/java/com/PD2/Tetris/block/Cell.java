@@ -22,15 +22,15 @@ public class Cell {
 		this.y = y;
 	}
 
-	public void left() {
+	public void moveLeft() {
 		x--;
 	}
 
-	public void down() {
+	public void moveDown() {
 		y++;
 	}
 
-	public void right() {
+	public void moveRight() {
 		x++;
 	}
 
