@@ -1,13 +1,13 @@
 package com.PD2.Tetris.block;
 
 import com.PD2.Tetris.shape.*;
+
 import java.awt.image.BufferedImage;
 
 public abstract class Tetromino {
 	private Cell center;
 	private int rotateTime;
-	private State[] states;
-	private BufferedImage image;
+	protected int[][][] stateList;
 
 	public static Tetromino random() {
 		int random = (int) Math.random() * 7;
@@ -41,15 +41,11 @@ public abstract class Tetromino {
 	public Tetromino() {
 		rotateTime = 0;
 		center = new Cell(5, 0);
-		states = null;
-		image = null;
 	}
 
 	public Tetromino(int x, int y) {
 		rotateTime = 0;
 		center = new Cell(x, y);
-		states = null;
-		image = null;
 	}
 
 	public void moveLeft() {
@@ -68,16 +64,59 @@ public abstract class Tetromino {
 		rotateTime++;
 	}
 
-	public abstract int[][] getBlockPositions();
+	public int getRotateTime() {
+		return rotateTime;
+	}
 
-	class State {
-		Cell[] states;
+	public abstract BufferedImage getImage();
 
-		State(int[][] positions) {
-			states = new Cell[4];
-			for (int i = 0;i < 4;i++) {
-				states[i] = new Cell(positions[i][0], positions[i][1]);
+	public int[][] getBlockPositions() {
+		return stateList[rotateTime % stateList.length];
+	}
+
+	@Override
+	public String toString() {
+		int[][] currentState = stateList[rotateTime % stateList.length];
+		int minX, maxX, minY, maxY;
+		minX = maxX = currentState[0][0];
+		minY = maxY = currentState[0][1];
+		for (int[] block : currentState) {
+			int x = block[0];
+			int y = block[1];
+			if (x < minX) {
+				minX = x;
+			}
+			if (y < minY) {
+				minY = y;
+			}
+			if (x > maxX) {
+				maxX = x;
+			}
+			if (y > maxY) {
+				maxY = y;
 			}
 		}
+		int width = maxX - minX + 1;
+		int height = maxY - minY + 1;
+		String empty = "   ";
+		String cell = "[ ]";
+		String result = center.toString() + "\n";
+		int index = 0;
+		for (int i = 0;i < height;i++) {
+			for (int j = 0;j < width;j++) {
+				if (j == currentState[index][0] - minX) {
+					result += cell;
+					index++;
+					if (index == currentState.length) {
+						result += "\n";
+						return result;
+					}
+				} else {
+					result += empty;
+				}
+			}
+			result += "\n";
+		}
+		return result;
 	}
 }
