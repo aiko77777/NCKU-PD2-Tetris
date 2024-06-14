@@ -76,7 +76,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("click start");
-                //put the game start function here
+                new Tetris().startGame(); // 启动游戏
             }
         });
 
