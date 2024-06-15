@@ -109,7 +109,7 @@ public class scoreEstimate {
                     totalScore += scoresPoolSpeed1[lines];
                     totalLine += lines;
                 }
-                else if(speed <= 250 && speed < 300){
+                else if(speed >= 250 && speed < 300){
                     totalScore += scoresPoolSpeed2[lines];
                     totalLine += lines;
                 }
