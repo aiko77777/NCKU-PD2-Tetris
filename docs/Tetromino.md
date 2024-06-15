@@ -1,39 +1,31 @@
 # Methods
 
-## Modifier and Type
+### `static Tetromino`
 
-### static Tetromino
+### `random()`
 
-## Method and Description
+### Create a random shape of Tetromino
 
-### random()
-
-#### Create a random shape of Tetromino
-
-## Example
+#### Example
 
 ```java
 Tetromino currentTetromino = Tetromino.random();
 // do something
 ```
 
-## Modifier and Type
+### `public void`
 
-### public void
+### `moveLeft()`
 
-## Method and Description
+### `moveDown()`
 
-### moveLeft()
+### `moveRight()`
 
-### moveDown()
+### `rotate()`
 
-### moveRight()
+### Move the Tetromino as the function name says
 
-### rotate()
-
-#### Move the Tetromino as the function name says
-
-## Example
+#### Example
 
 ```java
 currentTetromino.moveLeft();
@@ -42,34 +34,26 @@ currentTetromino.moveRight();
 currentTetromino.rotate();
 ```
 
-## Modifier and Type
+### `public BufferedImage`
 
-### public BufferedImage
+### `getImage()`
 
-## Method and Description
+### Return the reference of current shape picture
 
-### getImage()
-
-#### Return the reference of current shape picture
-
-## Example
+#### Example
 
 ```java
 BufferedImage image = currentTetromino.getImage();
 g.drawImage(image, 0, 0, null);
 ```
 
-## Modifier and Type
+### `public int[][]`
 
-### public int[][]
+### `getBlockPositions()`
 
-## Method and Description
+### Return 2D array of int with every block position in the Tetromino
 
-### getBlockPositions()
-
-#### Return 2D array of int with every block position in the Tetromino
-
-## Example
+#### Example
 
 ```java
 int[][] positions = currentTetromino.getBlockPositions();
@@ -84,33 +68,25 @@ x = 5, y = 2
 */
 ```
 
-## Modifier and Type
+### `public void`
 
-### public void
+### `paint(Graphics g)`
 
-## Method and Description
+### Require a Graphics type argument and paint every block in the right position
 
-### paint(Graphics g)
-
-#### Require a Graphics type argument and paint every block in the right position
-
-## Example
+#### Example
 
 ```java
 currentTetromino.paint(g);
 ```
 
-## Modifier and Type
+### `public String`
 
-### public String
+### `toString()`
 
-## Method and Description
+### Return a String with center block position and Tetromino shape
 
-### toString()
-
-#### Return a String with center block position and Tetromino shape
-
-## Example
+#### Example
 
 ```java
 String positionAndShape = currentTetromino.toString()
