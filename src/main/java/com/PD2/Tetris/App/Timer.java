@@ -1,15 +1,13 @@
 package com.zhao.demo.App;
 
 public class Timer {
-    private long startTime;
-    private long currentTime;
-    private boolean isRunning;
+    private long startTime = 0;
+    private long currentTime = 0;
+    private boolean isRunning = false;
 
-    public Timer() {
-        startTime = 0;
-        currentTime = 0;
-        isRunning = false;
-    }
+    private long countdownTime = 0;
+    private long countdownStartTime = 0;
+    private boolean isCountdownRunning = false;
 
     public void startTimer() {
         if (!isRunning) {
@@ -18,14 +16,14 @@ public class Timer {
         }
     }
 
-    public void stop() {
+    public void stopTimer() {
         if (isRunning) {
             currentTime += System.currentTimeMillis() - startTime;
             isRunning = false;
         }
     }
 
-    public void reset() {
+    public void resetTimer() {
         startTime = 0;
         currentTime = 0;
         isRunning = false;
@@ -39,7 +37,36 @@ public class Timer {
         }
     }
 
-    public boolean hasPassed(long durationMillis) {
+    public boolean haspassed(long durationMillis) {
         return getTime() >= durationMillis;
+    }
+
+    public void startCountdownTimer(long countdownMillis) {
+        countdownTime = countdownMillis;
+        countdownStartTime = System.currentTimeMillis();
+        isCountdownRunning = true;
+    }
+
+    public void stopCountdownTimer() {
+        isCountdownRunning = false;
+    }
+
+    public void resetCountdownTimer() {
+        countdownTime = 0;
+        countdownStartTime = 0;
+        isCountdownRunning = false;
+    }
+
+    public long getCountdownTime() {
+        if (isCountdownRunning) {
+            long elapsedTime = System.currentTimeMillis() - countdownStartTime;
+            return countdownTime - elapsedTime;
+        } else {
+            return countdownTime;
+        }
+    }
+
+    public boolean hasCountdownFinished() {
+        return getCountdownTime() <= 0;
     }
 }
