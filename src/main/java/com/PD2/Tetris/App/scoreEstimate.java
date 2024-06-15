@@ -39,13 +39,13 @@ public class scoreEstimate {
         //bonus
         if(lines >= 1){
             if((gameTimer.getTime() / 1000 < 10) && (totalScore > 0)){
-                totalScore = totalScore + 480;
+                totalScore = totalScore + (10-(int)(gameTimer.getTime()/1000))*60;
             }
             else if((gameTimer.getTime() / 1000 < 20) && (totalScore > 0)){
-                totalScore = totalScore + 250;
+                totalScore = totalScore + (20-(int)(gameTimer.getTime()/1000))*16;
             }
             else if((gameTimer.getTime() / 1000 < 30) && (totalScore > 0)){
-                totalScore = totalScore + 120;
+                totalScore = totalScore + (30-(int)(gameTimer.getTime()/1000))*5;
             }
             gameTimer.reset();
             gameTimer.startTimer();
