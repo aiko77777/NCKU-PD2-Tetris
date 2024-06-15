@@ -9,7 +9,6 @@ public class End_Menu {
     Font label_font=new  Font(null,Font.PLAIN,50);
     JFrame end_frame;
     JLabel total_score;
-    JPanel button_panel;
     JButton play_again_button,Menu_button;
     Container end_container;
     public End_Menu(){
