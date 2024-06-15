@@ -42,7 +42,7 @@ public class Timer {
     }
 
     public void startCountdownTimer(long countdownMillis) {
-        countdownTime = countdownMillis;
+        countdownTime = countdownMillis*1000;
         countdownStartTime = System.currentTimeMillis();
         isCountdownRunning = true;
     }
