@@ -8,6 +8,18 @@ public class Cell {
     public BufferedImage cell_image;
 
     public  Cell(int row,int column,BufferedImage cell_image){
-
+        this.row=row;
+        this.column=column;
+        this.cell_image=cell_image;
     }
+    public void move_right(){
+        this.column=this.column+1;
+    }
+    public  void move_left(){
+        this.column=this.column-1;
+    }
+    public  void move_down(){
+        this.row=this.row+1;
+    }
+
 }
