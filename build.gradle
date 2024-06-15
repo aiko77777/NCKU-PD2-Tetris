@@ -7,44 +7,42 @@
  */
 
 plugins {
-    id 'application'
+	id 'application'
 }
 
 group 'com.pd2'
 version '1.0-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-
-    targetCompatibility = JavaVersion.VERSION_11
-
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13.2'
+	testImplementation 'junit:junit:4.13.2'
 	testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+	testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+	options.encoding = 'UTF-8'
 }
 
 application {
-    mainClass = 'com.PD2.Tetris.App.Tetris'
+	mainClass = 'com.PD2.Tetris.App.Tetris'
 }
 
 test {
-    useJUnitPlatform()
-    testLogging {
-        events "failed", "passed", "skipped"
-        showExceptions true
-        exceptionFormat "full"
-        showCauses true
-        showStackTraces true
-    }
+	useJUnitPlatform()
+	testLogging {
+		events "failed", "passed", "skipped"
+		showExceptions true
+		exceptionFormat "full"
+		showCauses true
+		showStackTraces true
+	}
 }

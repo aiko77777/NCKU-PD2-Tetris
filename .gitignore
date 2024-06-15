@@ -28,3 +28,7 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
+
+# Ignore Android Studio setting directory and file
+.idea
+local.properties
