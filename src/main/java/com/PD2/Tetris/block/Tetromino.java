@@ -10,7 +10,7 @@ public abstract class Tetromino {
 	protected int[][][] stateList;
 
 	public static Tetromino random() {
-		int random = (int) Math.random() * 7;
+		int random = (int) (Math.random() * 7);
 		Tetromino t = null;
 		switch (random) {
 			case 0:
