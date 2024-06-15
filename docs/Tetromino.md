@@ -2,13 +2,13 @@
 
 ## Modifier and Type
 
-##### static Tetromino
+### static Tetromino
 
 ## Method and Description
 
-##### random()
+### random()
 
-##### Create a random shape of Tetromino
+#### Create a random shape of Tetromino
 
 ## Example
 
@@ -19,19 +19,19 @@ Tetromino currentTetromino = Tetromino.random();
 
 ## Modifier and Type
 
-##### public void
+### public void
 
 ## Method and Description
 
-##### moveLeft()
+### moveLeft()
 
-##### moveDown()
+### moveDown()
 
-##### moveRight()
+### moveRight()
 
-##### rotate()
+### rotate()
 
-##### Move the Tetromino as the function name says
+#### Move the Tetromino as the function name says
 
 ## Example
 
@@ -44,13 +44,13 @@ currentTetromino.rotate();
 
 ## Modifier and Type
 
-##### public BufferedImage
+### public BufferedImage
 
 ## Method and Description
 
-##### getImage()
+### getImage()
 
-##### Return the reference of current shape picture
+#### Return the reference of current shape picture
 
 ## Example
 
@@ -61,13 +61,13 @@ g.drawImage(image, 0, 0, null);
 
 ## Modifier and Type
 
-##### public int[][]
+### public int[][]
 
 ## Method and Description
 
-##### getBlockPositions()
+### getBlockPositions()
 
-##### Return 2D array of int with every block position in the Tetromino
+#### Return 2D array of int with every block position in the Tetromino
 
 ## Example
 
@@ -86,13 +86,13 @@ x = 5, y = 2
 
 ## Modifier and Type
 
-##### public void
+### public void
 
 ## Method and Description
 
-##### paint(Graphics g)
+### paint(Graphics g)
 
-##### Require a Graphics type argument and paint every block in the right position
+#### Require a Graphics type argument and paint every block in the right position
 
 ## Example
 
@@ -102,13 +102,13 @@ currentTetromino.paint(g);
 
 ## Modifier and Type
 
-##### public String
+### public String
 
 ## Method and Description
 
-##### toString()
+### toString()
 
-##### Return a String with center block position and Tetromino shape
+#### Return a String with center block position and Tetromino shape
 
 ## Example
 
