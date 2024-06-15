@@ -3,10 +3,12 @@ package com.PD2.Tetris.block;
 import com.PD2.Tetris.shape.*;
 
 import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 
 public abstract class Tetromino {
 	private Cell center;
 	private int rotateTime;
+	private static final int SIZE = 48;
 	protected int[][][] stateList;
 
 	public static Tetromino random() {
@@ -66,6 +68,16 @@ public abstract class Tetromino {
 
 	public int getRotateTime() {
 		return rotateTime;
+	}
+
+	public void paint(Graphics g) {
+		BufferedImage image = getImage();
+		int[][] blockPositions = getBlockPositions();
+        for (int[] position : blockPositions) {
+            int x = position[0] * SIZE;
+            int y = position[1] * SIZE;
+            g.drawImage(image, x, y, null);
+        }
 	}
 
 	public abstract BufferedImage getImage();
