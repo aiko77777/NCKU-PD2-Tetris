@@ -1,6 +1,7 @@
 package com.PD2.Tetris.block;
 
 import com.PD2.Tetris.shape.*;
+import com.PD2.Tetris.App.Tetris;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
@@ -44,18 +45,42 @@ public abstract class Tetromino {
 
 	public void moveLeft() {
 		center.moveLeft();
+		if (coincide()) {
+			center.moveRight();
+		}
 	}
 
 	public void moveDown() {
 		center.moveDown();
+		if (coincide()) {
+			center.moveUp();
+		}
 	}
 
 	public void moveRight() {
 		center.moveRight();
+		if (coincide()) {
+			center.moveLeft();
+		}
 	}
 
 	public void rotate() {
 		rotateTime++;
+		if (coincide()) {
+			rotateTime--;
+		}
+	}
+
+	public boolean coincide() {
+		int[][] positions = getBlockPositions();
+		for (int[] position : positions) {
+			int x = position[0];
+			int y = position[1];
+			if (x == 0 || x == 9 || Tetris.wall.hasBlock(x, y)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int getRotateTime() {

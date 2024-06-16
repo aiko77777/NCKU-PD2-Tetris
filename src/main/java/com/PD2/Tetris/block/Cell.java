@@ -23,6 +23,10 @@ public class Cell {
 		this.y = y;
 	}
 
+	public void moveUP() {
+		y--;
+	}
+
 	public void moveLeft() {
 		x--;
 	}

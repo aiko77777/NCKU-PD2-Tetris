@@ -19,6 +19,7 @@ public class Tetris extends JPanel {
 	public static BufferedImage T;
 	public static BufferedImage Z;
 	public static BufferedImage background;
+	public static Wall wall;
 
 	static {
 		try {
