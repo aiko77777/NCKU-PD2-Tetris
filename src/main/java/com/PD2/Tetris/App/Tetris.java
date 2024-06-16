@@ -4,11 +4,14 @@ import com.PD2.Tetris.block.*;
 import com.PD2.Tetris.shape.*;
 import com.PD2.Tetris.App.Menu;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 
@@ -38,6 +41,16 @@ public class Tetris extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage(background, 0, 0, null);
+		//平移坐标轴
+		g.translate(22, 15);
+		System.out.println("draw");
+	}
+	public void start(){
+
+	}
 
 	public static void main(String[] args) {
 
@@ -46,6 +59,12 @@ public class Tetris extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				System.out.println("game start!!!");
+				menu.frame.dispose();
+				JFrame game_frame =new JFrame("NCKU Tetris");
+				Tetris panel=new Tetris();
+				game_frame.setSize(810,940);
+				game_frame.setVisible(true);
+				game_frame.add(panel);
 				//write start() here
 			}
 		});
