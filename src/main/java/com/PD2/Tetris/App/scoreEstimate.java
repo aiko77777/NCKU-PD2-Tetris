@@ -47,7 +47,7 @@ public class scoreEstimate {
             else if((gameTimer.getTime() / 1000 < 30) && (totalScore > 0)){
                 totalScore = totalScore + (30-(int)(gameTimer.getTime()/1000))*5;
             }
-            gameTimer.reset();
+            gameTimer.resetTimer();
             gameTimer.startTimer();
         }
 
