@@ -1,6 +1,7 @@
 package com.PD2.Tetris.Game;
 
 import com.PD2.Tetris.App.End_Menu;
+import com.PD2.Tetris.App.scoreEstimate;
 import com.PD2.Tetris.block.Tetromino;
 import com.PD2.Tetris.block.Wall;
 import com.PD2.Tetris.block.Cell;
@@ -22,13 +23,15 @@ public class GameController extends JPanel implements KeyListener {
     private boolean holdUsed;
     private Wall wall;
     private JFrame gameFrame; // 用于在游戏结束时关闭窗口
+    private scoreEstimate scoreManager; // 分数管理对象
 
-    public GameController(JFrame frame) { //highlight
-        this.gameFrame = frame; //highlight
+    public GameController(JFrame frame) {
+        this.gameFrame = frame; 
         timer = new Timer();
         isPaused = false;
         holdUsed = false;
         wall = new Wall();
+        scoreManager = new scoreEstimate(); // 初始化分数管理对象
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -64,7 +67,7 @@ public class GameController extends JPanel implements KeyListener {
                 currentTetromino.moveUp();
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
-                    // Update score based on lines cleared
+                    scoreManager.updateScore(linesCleared, 0); // 更新分数
                 }
                 holdUsed = false;
                 spawnNewTetromino();
@@ -93,7 +96,23 @@ public class GameController extends JPanel implements KeyListener {
             repaint();
         }
     }
-
+/*
+    public void hardDropCurrentTetromino() {
+        if (currentTetromino != null) {
+            while (!currentTetromino.coincide()) {
+                currentTetromino.moveDown();
+            }
+            currentTetromino.moveUp();
+            int linesCleared = wall.add(currentTetromino);
+            if (linesCleared > 0) {
+                
+            }
+            holdUsed = false;
+            spawnNewTetromino();
+            repaint();
+        }
+    }
+*/
     public void holdCurrentTetromino() {
         if (!holdUsed) {
             if (holdTetromino == null) {
@@ -148,7 +167,7 @@ public class GameController extends JPanel implements KeyListener {
                 rotateCurrentTetromino();
                 break;
             case KeyEvent.VK_SPACE:
-                // 注释掉硬降代码
+                // 硬降代码
                 // hardDropCurrentTetromino();
                 break;
             case KeyEvent.VK_C:
