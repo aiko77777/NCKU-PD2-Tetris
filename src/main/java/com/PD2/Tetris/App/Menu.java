@@ -67,13 +67,13 @@ public class Menu {
         start_button.setFont(button_font);
         button_panel.add(start_button);
 
-        start_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("click start");
-                //put the game start function here
-            }
-        });
+//        start_button.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent actionEvent) {
+//                //System.out.println("click start");
+//                //put the game start function here
+//            }
+//        });
 
         //setting button
         setting_button = new JButton("setting");
