@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameController extends JPanel implements KeyListener { //highlight
+public class GameController extends JPanel implements KeyListener { 
     private Timer timer;
     private boolean isPaused;
     private final int delay = 1000; // 每一秒触发一次
@@ -21,8 +21,8 @@ public class GameController extends JPanel implements KeyListener { //highlight
     private Wall wall;
     private JFrame gameFrame; // 用于在游戏结束时关闭窗口
 
-    public GameController(JFrame frame) { //highlight
-        this.gameFrame = frame; //highlight
+    public GameController(JFrame frame) { 
+        this.gameFrame = frame; 
         timer = new Timer();
         isPaused = false;
         holdUsed = false;
