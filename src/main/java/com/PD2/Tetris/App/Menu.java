@@ -67,6 +67,17 @@ public class Menu {
         start_button.setFont(button_font);
         button_panel.add(start_button);
 
+
+//         start_button.addActionListener(new ActionListener() {   //the start button event
+//             @Override
+//             public void actionPerformed(ActionEvent actionEvent) {
+//                 System.out.println("click start");
+//                 new Tetris().startGame(); // 启动游戏
+//             }
+//         });
+
+
+
 //        start_button.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent actionEvent) {
@@ -79,6 +90,7 @@ public class Menu {
         setting_button = new JButton("setting");
         setting_button.setBackground(buttonBackgroundColor);
         setting_button.setForeground(buttonTextColor);
+
         setting_button.setFont(button_font);
         button_panel.add(setting_button);
 

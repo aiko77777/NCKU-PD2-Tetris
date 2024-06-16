@@ -59,6 +59,9 @@ public class End_Menu {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("click Menu");
+                end_frame.dispose();
+                new Menu();
+
             }
         });
 

@@ -3,7 +3,8 @@ package com.PD2.Tetris.App;
 import com.PD2.Tetris.block.*;
 import com.PD2.Tetris.shape.*;
 import com.PD2.Tetris.App.Menu;
-
+import com.PD2.Tetris.Game.GameController;
+  
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,12 +62,16 @@ public class Tetris extends JPanel {
 				System.out.println("game start!!!");
 				menu.frame.dispose();
 				JFrame game_frame =new JFrame("NCKU Tetris");
+        GameController gameController = new GameController(game_frame);
 				Tetris panel=new Tetris();
 				game_frame.setSize(810,940);
+        game_frame.add(gameController);
 				game_frame.setVisible(true);
 				game_frame.add(panel);
+        gameController.start();
 				//write start() here
 			}
 		});
 	}
+
 }
