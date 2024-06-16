@@ -45,7 +45,7 @@ public class Wall {
         for (int[] position : blockPositions) {
             int x = position[0];
             int y = position[1];
-            if (y + 1 < HEIGHT && hasBlock(x, y + 1)) {
+            if (y == HEIGHT - 1 || hasBlock(x, y + 1)) {
                 touchWall = true;
                 break;
             }
