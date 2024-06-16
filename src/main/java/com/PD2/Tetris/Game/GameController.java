@@ -64,7 +64,6 @@ public class GameController extends JPanel implements KeyListener {
         if (currentTetromino != null) {
             currentTetromino.moveDown();
             if (currentTetromino.coincide()) {
-                currentTetromino.moveUp();
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
                     scoreManager.updateScore(linesCleared, 0); // 更新分数
