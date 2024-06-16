@@ -1,4 +1,4 @@
-package com.zhao.demo.App;
+package com.PD2.Tetris.App;
 
 public class scoreEstimate {
     // 分數:一次消除0行,1行,2行,3行,4行獲得分數
