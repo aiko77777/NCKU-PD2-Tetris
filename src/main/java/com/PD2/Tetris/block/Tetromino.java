@@ -8,36 +8,28 @@ import java.awt.Graphics;
 public abstract class Tetromino {
 	private Cell center;
 	private int rotateTime;
-	private static final int SIZE = 48;
 	protected int[][][] stateList;
 
 	public static Tetromino random() {
 		int random = (int) (Math.random() * 7);
-		Tetromino t = null;
 		switch (random) {
 			case 0:
-				t = new I();
-				break;
+				return new I();
 			case 1:
-				t = new J();
-				break;
+				return new J();
 			case 2:
-				t = new L();
-				break;
+				return new L();
 			case 3:
-				t = new O();
-				break;
+				return new O();
 			case 4:
-				t = new S();
-				break;
+				return new S();
 			case 5:
-				t = new Z();
-				break;
+				return new Z();
 			case 6:
-				t = new I();
-				break;
+				return new T();
+			default:
+				return null;
 		}
-		return t;
 	}
 
 	public Tetromino() {
@@ -73,11 +65,11 @@ public abstract class Tetromino {
 	public void paint(Graphics g) {
 		BufferedImage image = getImage();
 		int[][] blockPositions = getBlockPositions();
-        for (int[] position : blockPositions) {
-            int x = position[0] * SIZE;
-            int y = position[1] * SIZE;
-            g.drawImage(image, x, y, null);
-        }
+		for (int[] position : blockPositions) {
+			int x = position[0] * Cell.SIZE;
+			int y = position[1] * Cell.SIZE;
+			g.drawImage(image, x, y, null);
+		}
 	}
 
 	public abstract BufferedImage getImage();

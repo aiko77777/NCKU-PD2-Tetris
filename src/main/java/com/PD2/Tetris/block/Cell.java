@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Cell {
 	private int x, y;
+	public static final int SIZE = 48;
 
 	public Cell() {
 		this(0, 0);
