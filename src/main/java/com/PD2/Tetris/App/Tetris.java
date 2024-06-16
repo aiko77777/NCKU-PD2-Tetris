@@ -57,7 +57,7 @@ public class Tetris extends JPanel {
         menu.start_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("game start");
+                System.out.println("game start!!!");
                 menu.frame.dispose();
                 JFrame game_frame = new JFrame("NCKU Tetris");
                 GameController gameController = new GameController(game_frame);
