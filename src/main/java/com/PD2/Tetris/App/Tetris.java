@@ -2,7 +2,10 @@ package com.PD2.Tetris.App;
 
 import com.PD2.Tetris.block.*;
 import com.PD2.Tetris.shape.*;
+import com.PD2.Tetris.App.Menu;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -37,6 +40,14 @@ public class Tetris extends JPanel {
 	}
 
 	public static void main(String[] args) {
-		new Menu();
+
+		Menu menu=new Menu();
+		menu.start_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				System.out.println("game start!!!");
+				//write start() here
+			}
+		});
 	}
 }
