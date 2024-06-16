@@ -6,12 +6,15 @@ public class scoreEstimate {
     private int[] scoresPoolSpeed2 = {0, 200, 500, 800, 1500};
     private int[] scoresPoolSpeed3 = {0, 300, 800, 1300, 2000};
     private int scorePoolLength = scoresPoolSpeed1.length;
-    // 目前總分
+    //下落速度
     private int speed = 600;
+    // 目前總分
     private int totalScore = 0;
     // 消除過的總行數
     private int totalLine = 0;
-    
+
+    private Timer gameTimer = new Timer();
+
     // get目前總分
     public int getTotalScore() {
         return totalScore;
@@ -33,29 +36,44 @@ public class scoreEstimate {
     }
     // 更新分數
     public void updateScore(int lines, int mode) {
+        //bonus
+        if(lines >= 1){
+            if((gameTimer.getTime() / 1000 < 10) && (totalScore > 0)){
+                totalScore = totalScore + (10-(int)(gameTimer.getTime()/1000))*60;
+            }
+            else if((gameTimer.getTime() / 1000 < 20) && (totalScore > 0)){
+                totalScore = totalScore + (20-(int)(gameTimer.getTime()/1000))*16;
+            }
+            else if((gameTimer.getTime() / 1000 < 30) && (totalScore > 0)){
+                totalScore = totalScore + (30-(int)(gameTimer.getTime()/1000))*5;
+            }
+            gameTimer.reset();
+            gameTimer.startTimer();
+        }
+
         if(mode == 0){//正常模式
             if (lines >= 0 && lines < scorePoolLength) {
-                if((totalScore<500)){
+                if((totalScore < 500)){
                     totalScore += scoresPoolSpeed1[lines];
                     totalLine += lines;
                     speed = 600-totalScore/6;
                 }
-                else if((totalScore>=500&&totalScore<1500)){
+                else if((totalScore >= 500 && totalScore<2000)){
                     totalScore += scoresPoolSpeed2[lines];
                     totalLine += lines;
-                    speed = 500-totalScore/8;
+                    speed = 550 - totalScore/8;
                 }
-                else if((totalScore>=1500)){
+                else if((totalScore >= 2000)){
                     totalScore += scoresPoolSpeed3[lines];
                     totalLine += lines;
-                    speed = 450-totalScore/10;
-                    if(speed<=200){
-                        speed = 200;
+                    speed = 550 - totalScore/10;
+                    if(speed <= 250){
+                        speed = 250;
                     }
                 }
             }
         }
-        else if(mode==1){//扣分模式
+        else if(mode == 1){//扣分模式
             if(totalScore > 0){
                 totalScore = totalScore - 2;
             }
@@ -64,17 +82,17 @@ public class scoreEstimate {
                     totalScore = totalScore + 2;
                 }
 
-                if((totalScore<500)){
+                if((totalScore < 500)){
                     totalScore += scoresPoolSpeed1[lines];
                     totalLine += lines;
-                    speed = 600-totalScore/6;
+                    speed = 600 - totalScore/6;
                 }
-                else if((totalScore>=500&&totalScore<1500)){
+                else if((totalScore >= 500 && totalScore < 1500)){
                     totalScore += scoresPoolSpeed2[lines];
                     totalLine += lines;
-                    speed = 500-totalScore/8;
+                    speed = 500 - totalScore/8;
                 }
-                else if((totalScore>=1500)){
+                else if((totalScore >= 1500)){
                     totalScore += scoresPoolSpeed3[lines];
                     totalLine += lines;
                     speed = 450-totalScore/10;
@@ -85,22 +103,21 @@ public class scoreEstimate {
             }
         }
         else if(mode==2){//隨機速度模式
-            speed = (int)(Math.random()*(400-200+1))+200;
+            speed = (int)(Math.random()*(500 - 200 + 1)) + 200;
             if (lines >= 0 && lines < scorePoolLength) {
-                if((speed>=300)){
+                if((speed >= 300)){
                     totalScore += scoresPoolSpeed1[lines];
                     totalLine += lines;
                 }
-                else if(speed<=250&&speed<300){
+                else if(speed >= 250 && speed < 300){
                     totalScore += scoresPoolSpeed2[lines];
                     totalLine += lines;
                 }
-                else if(speed<250){
+                else if(speed < 250){
                     totalScore += scoresPoolSpeed3[lines];
                     totalLine += lines;
                 }
             }
         }
-        
     }
 }
