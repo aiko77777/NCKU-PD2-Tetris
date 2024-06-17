@@ -25,6 +25,7 @@ public class Tetris extends JPanel implements  KeyListener{
     private Timer timer;
     private final int delay = 200; // 每一秒触发一次
     private boolean isPaused;
+    private boolean isOver=false;
     private Tetromino currentTetromino;
     private Tetromino nextTetromino; // 下一个方块
 
@@ -38,6 +39,7 @@ public class Tetris extends JPanel implements  KeyListener{
     Tetris(){
         nextTetromino = Tetromino.random(); // 初始化下一个方块
         //wall=new Wall();
+        gameFrame=new JFrame("NCKU Tetris");
         timer=new Timer();
         isPaused=false;
         setFocusable(true);
@@ -86,18 +88,25 @@ public class Tetris extends JPanel implements  KeyListener{
         }
     }
     public void endGame() {
-        // 游戏结束逻辑
+        // game over
         System.out.println("Game Over");
         gameFrame.dispose(); // 关闭当前游戏窗口
+
         new End_Menu(); // 显示结束菜单
+        isOver=true;
     }
     public void spawnNewTetromino() {
-        currentTetromino = nextTetromino; // 当前方块变为下一个方块
-        nextTetromino = Tetromino.random(); // 生成新的下一个方块
+
         if (wall.add(currentTetromino) == Wall.LOSE) {
+            currentTetromino=null;
             endGame();
         }
-        repaint();
+        else {
+            currentTetromino = nextTetromino; // 当前方块变为下一个方块
+            nextTetromino = Tetromino.random(); // 生成新的下一个方块
+            repaint();
+        }
+
     }
     public void dropCurrentTetromino() {
         int check_boundary=0;
@@ -141,14 +150,16 @@ public class Tetris extends JPanel implements  KeyListener{
             }
         }
     }
+
     public void start() {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (!isPaused) {
-
+                if (!isPaused && !isOver) {
+                    System.out.println(isOver);
                     dropCurrentTetromino();
                 }
+                System.out.println("timer");
             }
         }, 0, delay);
 
@@ -211,9 +222,12 @@ public class Tetris extends JPanel implements  KeyListener{
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("game start!!!");
                 menu.frame.dispose();
-                JFrame game_frame = new JFrame("NCKU Tetris");
-                game_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 Tetris panel=new Tetris();
+                //JFrame game_frame = new JFrame("NCKU Tetris");
+                JFrame game_frame=panel.gameFrame;
+                game_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
                 //GameController gameController = new GameController(game_frame);
                 game_frame.setSize(810, 940);
                 game_frame.add(panel);
@@ -247,7 +261,7 @@ public class Tetris extends JPanel implements  KeyListener{
                 break;
             case KeyEvent.VK_SPACE:
                 // 硬降代码
-                // hardDropCurrentTetromino();
+                //hardDropCurrentTetromino();
                 break;
             case KeyEvent.VK_C:
                 holdCurrentTetromino();
@@ -274,3 +288,7 @@ public class Tetris extends JPanel implements  KeyListener{
 //Tetromino coincide add "||y==18"
 //WALL HEIGHT =19 FROM 20
 //WAll line 51 變為HHEIGHT-2
+//Tetromino line 84:boundary
+//wall line7  width =9 from 10
+//Tetris 41 game_frame 改在class 裡面new 出來 這樣endGame()才能吃到game_frame
+//Tetris line 98~109 endGame時應該要把currentTetromino設為null，才能終止dropCurrentTetromino()的loop，以至於不會一直new出end_menu

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 
 public class Wall {
-    private static final int WIDTH = 10;
+    private static final int WIDTH = 9;
     private static final int HEIGHT = 19;
     private final BufferedImage[][] wall;
 
