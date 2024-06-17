@@ -24,7 +24,7 @@ public class Menu {
         Color foreColor = Color.white;
 
         //whole frame
-        frame = new JFrame();
+        frame = new JFrame("NCKU Tetris");
         frame.setSize(810, 940);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(backgroundColor);
@@ -92,7 +92,7 @@ public class Menu {
         setting_button.setForeground(buttonTextColor);
 
         setting_button.setFont(button_font);
-        button_panel.add(setting_button);
+        //button_panel.add(setting_button);
 
         setting_button.addActionListener(new ActionListener() {
             @Override
