@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
 
 public class Tetris extends JPanel {
     private Timer timer;
-    private final int delay = 200; // 每一秒触发一次
+    private final int delay = 400; // 每一秒触发一次
     private boolean isPaused;
     private Tetromino currentTetromino;
     private Tetromino nextTetromino; // 下一个方块
@@ -98,8 +98,8 @@ public class Tetris extends JPanel {
     public void dropCurrentTetromino() {
         int check_boundary=0;
         if (currentTetromino != null) {
-            System.out.println(currentTetromino.coincide());
-            check_boundary=currentTetromino.moveDown();
+            //System.out.println(currentTetromino.coincide());
+            check_boundary=currentTetromino.moveDown();     //因為movedown裡有coincide()-->moveup()，所以一旦撞到方塊或邊界，會先moveup()再進行line_104的判斷，currentTetromino.coincide永遠不會為true
 
             if (check_boundary==1) {
                 System.out.println("reach buttom");
@@ -108,6 +108,7 @@ public class Tetris extends JPanel {
                     scoreManager.updateScore(linesCleared, 0); // 更新分数
                 }
                 holdUsed = false;
+
                 spawnNewTetromino();
             }
             repaint();
@@ -116,7 +117,7 @@ public class Tetris extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         //super.paintComponent(g);
-        //wall.paint(g);
+        wall.paint(g);
         if (currentTetromino != null) {
             currentTetromino.paint(g);
         }
@@ -184,6 +185,9 @@ public class Tetris extends JPanel {
         });
     }
 }
-
-//changed coincide add "||y==15"
-
+//我有改的地方
+//修正Tetris line 102
+//
+//Tetromino coincide add "||y==18"
+//WALL HEIGHT =19 FROM 20
+//WAll line 51 變為HHEIGHT-2

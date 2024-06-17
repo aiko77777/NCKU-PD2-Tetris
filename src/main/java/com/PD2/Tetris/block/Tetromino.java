@@ -76,13 +76,12 @@ public abstract class Tetromino {
 	}
 
 	public boolean coincide() {
-		int buttom=0;
 		int[][] positions = getBlockPositions();
 		for (int[] position : positions) {
 			int x = position[0];
 			int y = position[1];
 			//System.out.println(y);
-			if (x == 0 || x == 9 || Tetris.wall.hasBlock(x, y)|| y>17) {
+			if (x == 0 || x == 9 || Tetris.wall.hasBlock(x, y)|| y==18) {
 				//System.out.println("reach buttom");
 				return true;
 			}

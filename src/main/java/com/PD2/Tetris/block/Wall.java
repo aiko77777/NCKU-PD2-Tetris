@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Wall {
     private static final int WIDTH = 10;
-    private static final int HEIGHT = 20;
+    private static final int HEIGHT = 19;
     private final BufferedImage[][] wall;
 
     public static final int FAIL = -1;
@@ -41,24 +41,37 @@ public class Wall {
         int[][] blockPositions = t.getBlockPositions();
         boolean touchWall = false;
 
+
 		// check if Tetromino touch the wall
         for (int[] position : blockPositions) {
             int x = position[0];
             int y = position[1];
-            if (y == HEIGHT - 1 || hasBlock(x, y + 1)) {
+            System.out.println(y);
+
+            if (y == HEIGHT - 2 || hasBlock(x, y + 1)) {
+                System.out.println("touchwall!!!!");
+
                 touchWall = true;
                 break;
             }
         }
+
+        System.out.println("touchwall"+touchWall);
         if (!touchWall) {
+
             return FAIL;
         }
-
+        System.out.println("set image");
 		// add image to the right position
         BufferedImage image = t.getImage();
+
         for (int[] position : blockPositions) {
             int x = position[0];
             int y = position[1];
+            System.out.println("fill image_x"+x);
+            System.out.println("fill image_y"+y);
+
+
             wall[y][x] = image;
         }
 
