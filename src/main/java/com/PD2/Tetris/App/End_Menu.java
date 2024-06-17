@@ -11,8 +11,11 @@ public class End_Menu {
     JLabel total_score;
     JButton play_again_button,Menu_button;
     Container end_container;
-    public End_Menu(){
+    int score;
+
+    public End_Menu(int score){
 //end frame
+        this.score=score;
         end_frame=new JFrame("NCKU Trtris");
         end_frame.setSize(810,940);
         end_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,8 +31,9 @@ public class End_Menu {
 
 
 //score label
-        int score=100;
-        Integer score_obj=(Integer) score;
+        //int score=100;
+
+        Integer score_obj=(Integer) this.score;
 
         total_score=new JLabel("Total score:"+score_obj.toString());   //need to get the total score in game end
         total_score.setFont(label_font);
@@ -47,6 +51,7 @@ public class End_Menu {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("click play again");
+
             }
         });
 //back to main_menu
@@ -60,7 +65,7 @@ public class End_Menu {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("click Menu");
                 end_frame.dispose();
-                new Menu();
+                //new Menu();
 
             }
         });
@@ -71,6 +76,6 @@ public class End_Menu {
         end_container.validate();
     }
     public static void main(String[] args){
-        new End_Menu();
+        //new End_Menu();
     }
 }

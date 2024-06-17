@@ -107,7 +107,7 @@ public class Menu {
         leader_board_button.setBackground(buttonBackgroundColor);
         leader_board_button.setForeground(buttonTextColor);
         leader_board_button.setFont(button_font);
-        button_panel.add(leader_board_button);
+        //button_panel.add(leader_board_button);
 
         leader_board_button.addActionListener(new ActionListener() {
             @Override

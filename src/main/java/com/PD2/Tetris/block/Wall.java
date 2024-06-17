@@ -38,10 +38,10 @@ public class Wall {
     }
 
     public int add(Tetromino t) {
-        System.out.println("add begin");
+
         int[][] blockPositions = t.getBlockPositions();
         boolean touchWall = false;
-        System.out.println("enter add");
+
 
 		// check if Tetromino touch the wall
         for (int[] position : blockPositions) {
@@ -50,7 +50,7 @@ public class Wall {
             //System.out.println(y);
 
             if (y == HEIGHT - 2 || hasBlock(x, y +1)) {
-                System.out.println("touchwall!!!!");
+                //System.out.println("touchwall!!!!");
 
                 touchWall = true;
                 break;
@@ -62,7 +62,7 @@ public class Wall {
 
             return FAIL;
         }
-        System.out.println("set image");
+        //System.out.println("set image");
 		// add image to the right position
         BufferedImage image = t.getImage();
 
@@ -83,10 +83,10 @@ public class Wall {
         for (int y = HEIGHT - 1; y >= 0; y--) {
             if (isFull(y)) {
                 eliminateLineCount++;
-                System.out.println("isfull:"+y);
+                //System.out.println("isfull:"+y);
             } else {
                 temp[index--] = wall[y];
-                System.out.println("nonfull:"+y);
+                //System.out.println("nonfull:"+y);
 
             }
         }

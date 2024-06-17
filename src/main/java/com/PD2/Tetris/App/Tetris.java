@@ -93,8 +93,56 @@ public class Tetris extends JPanel implements  KeyListener{
         System.out.println("Game Over");
         gameFrame.dispose(); // 关闭当前游戏窗口
 
-        new End_Menu(); // 显示结束菜单
-        isOver=true;
+        End_Menu end_menu=new End_Menu(scoreManager.getTotalScore()); // 显示结束菜单
+        end_menu.play_again_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("game start!!!");
+                end_menu.end_frame.dispose();
+                Tetris panel=new Tetris();  //start button new 出一個新game_frame
+                JFrame game_frame=panel.gameFrame;
+                game_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+                //GameController gameController = new GameController(game_frame);
+                game_frame.setSize(810, 940);
+                game_frame.add(panel);
+                //game_frame.add(gameController);
+                game_frame.setVisible(true);
+                wall=new Wall();    //清空方塊
+
+                panel.start();
+
+            }
+        });
+        end_menu.Menu_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                end_menu.end_frame.dispose();
+                Menu menu = new Menu(); //new 出新的menu
+                menu.start_button.addActionListener(new ActionListener() {  //再覆寫一次menu start button
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        System.out.println("game start!!!");
+                        menu.frame.dispose();
+                        Tetris panel=new Tetris();  //start button new 出一個新game_frame
+                        //JFrame game_frame = new JFrame("NCKU Tetris");
+                        JFrame game_frame=panel.gameFrame;
+                        game_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+                        //GameController gameController = new GameController(game_frame);
+                        game_frame.setSize(810, 940);
+                        game_frame.add(panel);
+                        //game_frame.add(gameController);
+                        game_frame.setVisible(true);
+                        wall=new Wall();    //清空方塊
+                        panel.start();
+                    }
+                });
+            }
+        });
+        //isOver=true;
     }
     public void spawnNewTetromino() {
 
@@ -122,6 +170,8 @@ public class Tetris extends JPanel implements  KeyListener{
                 if (linesCleared > 0) {
                     scoreManager.updateScore(linesCleared, 0); // 更新分数
                     spawnNewTetromino();
+                    System.out.println("score:"+scoreManager.getTotalScore());
+
 
                 }
                 else if(linesCleared ==Wall.LOSE){
@@ -164,13 +214,18 @@ public class Tetris extends JPanel implements  KeyListener{
             }
         }
     }
+    private void paintSource(Graphics g) {
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+        g.drawString("score: " + scoreManager.getTotalScore(), 490, 250);
+        g.drawString("total lines:"  + scoreManager.getTotalLine(), 490, 430);
+    }
 
     public void start() {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (!isPaused && !isOver) {
-                    //System.out.println(isOver);
+                    //System.out.println("sssttart");
                     dropCurrentTetromino();
                 }
             }
@@ -188,6 +243,7 @@ public class Tetris extends JPanel implements  KeyListener{
         g.translate(22, 15);
         paintComponent(g);
         drawNextTetromino(g);
+        paintSource(g);
 
         //System.out.println("draw");
     }
@@ -307,3 +363,7 @@ public class Tetris extends JPanel implements  KeyListener{
 //Tetris line 98~109 endGame時應該要把currentTetromino設為null，才能終止dropCurrentTetromino()的loop，以至於不會一直new出end_menu
 //Tetris line 99  line 124 :避免add呼叫兩次，setimage 兩次
 //Tetris line 124 一觸底時就要設置spawnNewTetromino();
+
+//Tetris line 96,End_Menu line 16,End_Menu add constructor : pass in a score and build the
+//Tetris line 92 ~146 play_again,再new一個game_frame,一定要新增一個new wall 把圖片區清空，不然會一直game over，Menu 回到主選單 再new一次Menu 再重新override一次Menu 選項裡的事件
+//Tetris line 190 line219 :印出總分和總行數
