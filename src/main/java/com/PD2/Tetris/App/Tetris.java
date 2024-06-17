@@ -62,13 +62,14 @@ public class Tetris extends JPanel {
 				System.out.println("game start!!!");
 				menu.frame.dispose();
 				JFrame game_frame =new JFrame("NCKU Tetris");
-        GameController gameController = new GameController(game_frame);
+				game_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				GameController gameController = new GameController(game_frame);
 				Tetris panel=new Tetris();
 				game_frame.setSize(810,940);
-        game_frame.add(gameController);
+        		game_frame.add(gameController);
 				game_frame.setVisible(true);
 				game_frame.add(panel);
-        gameController.start();
+        		gameController.start();
 				//write start() here
 			}
 		});

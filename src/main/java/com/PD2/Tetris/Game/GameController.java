@@ -6,12 +6,14 @@ import com.PD2.Tetris.block.Wall;
 import com.PD2.Tetris.block.Cell;
 
 import javax.swing.*;
+
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameController extends JPanel implements KeyListener, ActionListener {
+public class GameController extends JPanel implements KeyListener{
     private Timer timer;
     private boolean isPaused;
     private final int delay = 1000; // 每一秒触发一次
@@ -57,7 +59,7 @@ public class GameController extends JPanel implements KeyListener, ActionListene
         if (currentTetromino != null) {
             currentTetromino.moveDown();
             if (currentTetromino.coincide()) {
-                currentTetromino.moveUp();
+                //currentTetromino.moveUp();
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
                     // Update score based on lines cleared
@@ -95,7 +97,7 @@ public class GameController extends JPanel implements KeyListener, ActionListene
             while (!currentTetromino.coincide()) {
                 currentTetromino.moveDown();
             }
-            currentTetromino.moveUp();
+            //currentTetromino.moveUp();
             int linesCleared = wall.add(currentTetromino);
             if (linesCleared > 0) {
                 // Update score based on lines cleared
@@ -181,8 +183,8 @@ public class GameController extends JPanel implements KeyListener, ActionListene
     @Override
     public void keyReleased(KeyEvent e) {}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Empty implementation for ActionListener interface
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        // Empty implementation for ActionListener interface
+//    }
 }
