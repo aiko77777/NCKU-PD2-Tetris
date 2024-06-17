@@ -80,8 +80,8 @@ public abstract class Tetromino {
 		for (int[] position : positions) {
 			int x = position[0];
 			int y = position[1];
-			//System.out.println(y);
-			if (x == 0 || x == 9 || Tetris.wall.hasBlock(x, y)|| y==18) {
+			System.out.println(x);
+			if (x == -1 || x == 9 || Tetris.wall.hasBlock(x, y)|| y==18) {
 				//System.out.println("reach buttom");
 				return true;
 			}

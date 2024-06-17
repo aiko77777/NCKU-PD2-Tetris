@@ -2,7 +2,7 @@ package com.PD2.Tetris.App;
 
 import com.PD2.Tetris.block.*;
 import com.PD2.Tetris.shape.*;
-import com.PD2.Tetris.Game.GameController;
+//import com.PD2.Tetris.Game.GameController;
 import com.PD2.Tetris.block.Tetromino;
 
 
@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -18,9 +21,9 @@ import java.util.Timer;
 
 import javax.imageio.ImageIO;
 
-public class Tetris extends JPanel {
+public class Tetris extends JPanel implements  KeyListener{
     private Timer timer;
-    private final int delay = 400; // 每一秒触发一次
+    private final int delay = 200; // 每一秒触发一次
     private boolean isPaused;
     private Tetromino currentTetromino;
     private Tetromino nextTetromino; // 下一个方块
@@ -40,6 +43,7 @@ public class Tetris extends JPanel {
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         currentTetromino=Tetromino.random();
+        addKeyListener(this);
     }
     // loading pictures
     public static BufferedImage I;
@@ -163,6 +167,41 @@ public class Tetris extends JPanel {
 
         //System.out.println("draw");
     }
+    //++++++++++++++++++++++++++++++++++++++++++
+    public void moveCurrentTetrominoLeft() {
+        if (currentTetromino != null) {
+            currentTetromino.moveLeft();
+            repaint();
+        }
+    }
+
+    public void moveCurrentTetrominoRight() {
+        if (currentTetromino != null) {
+            currentTetromino.moveRight();
+            repaint();
+        }
+    }
+
+    public void rotateCurrentTetromino() {
+        if (currentTetromino != null) {
+            currentTetromino.rotate();
+            repaint();
+        }
+    }
+    public void pause() {
+        isPaused = true;
+        timer.cancel();
+    }
+
+    public void resume() {
+        isPaused = false;
+        timer = new Timer();
+        start();
+    }
+
+
+
+
 
 
     public static void main(String[] args) {
@@ -175,7 +214,7 @@ public class Tetris extends JPanel {
                 JFrame game_frame = new JFrame("NCKU Tetris");
                 game_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 Tetris panel=new Tetris();
-                GameController gameController = new GameController(game_frame);
+                //GameController gameController = new GameController(game_frame);
                 game_frame.setSize(810, 940);
                 game_frame.add(panel);
                 //game_frame.add(gameController);
@@ -184,6 +223,50 @@ public class Tetris extends JPanel {
             }
         });
     }
+
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT:
+                moveCurrentTetrominoLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+                moveCurrentTetrominoRight();
+                break;
+            case KeyEvent.VK_DOWN:
+                dropCurrentTetromino();
+                break;
+            case KeyEvent.VK_UP:
+                rotateCurrentTetromino();
+                break;
+            case KeyEvent.VK_SPACE:
+                // 硬降代码
+                // hardDropCurrentTetromino();
+                break;
+            case KeyEvent.VK_C:
+                holdCurrentTetromino();
+                break;
+            case KeyEvent.VK_P:
+                if (isPaused) {
+                    resume();
+                } else {
+                    pause();
+                }
+                break;
+            case KeyEvent.VK_Q:
+                System.exit(0);
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {}
 }
 //我有改的地方
 //修正Tetris line 102
