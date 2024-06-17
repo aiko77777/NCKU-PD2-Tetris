@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
 
 public class Tetris extends JPanel {
     private Timer timer;
-    private final int delay = 1000; // 每一秒触发一次
+    private final int delay = 200; // 每一秒触发一次
     private boolean isPaused;
     private Tetromino currentTetromino;
     private Tetromino nextTetromino; // 下一个方块
@@ -34,12 +34,12 @@ public class Tetris extends JPanel {
     private scoreEstimate scoreManager; // 分数管理对象
     Tetris(){
         nextTetromino = Tetromino.random(); // 初始化下一个方块
-        wall=new Wall();
+        //wall=new Wall();
         timer=new Timer();
         isPaused=false;
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        //currentTetromino=Tetromino.random();
+        currentTetromino=Tetromino.random();
     }
     // loading pictures
     public static BufferedImage I;
@@ -50,7 +50,7 @@ public class Tetris extends JPanel {
     public static BufferedImage T;
     public static BufferedImage Z;
     public static BufferedImage background;
-    //public static Wall wall;
+
 
     static {
         try {
@@ -62,6 +62,7 @@ public class Tetris extends JPanel {
             T = ImageIO.read(new File("img/T.png"));
             Z = ImageIO.read(new File("img/Z.png"));
             background = ImageIO.read(new File("img/background.png"));
+            wall=new Wall();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,11 +96,13 @@ public class Tetris extends JPanel {
         repaint();
     }
     public void dropCurrentTetromino() {
+        int check_boundary=0;
         if (currentTetromino != null) {
-            currentTetromino.moveDown();
             System.out.println(currentTetromino.coincide());
-            if (currentTetromino.coincide()) {
+            check_boundary=currentTetromino.moveDown();
 
+            if (check_boundary==1) {
+                System.out.println("reach buttom");
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
                     scoreManager.updateScore(linesCleared, 0); // 更新分数
@@ -113,7 +116,7 @@ public class Tetris extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         //super.paintComponent(g);
-        wall.paint(g);
+        //wall.paint(g);
         if (currentTetromino != null) {
             currentTetromino.paint(g);
         }
@@ -138,6 +141,7 @@ public class Tetris extends JPanel {
             @Override
             public void run() {
                 if (!isPaused) {
+
                     dropCurrentTetromino();
                 }
             }
@@ -156,7 +160,7 @@ public class Tetris extends JPanel {
         paintComponent(g);
         drawNextTetromino(g);
 
-        System.out.println("draw");
+        //System.out.println("draw");
     }
 
 

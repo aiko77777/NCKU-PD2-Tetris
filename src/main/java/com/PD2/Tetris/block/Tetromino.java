@@ -50,12 +50,16 @@ public abstract class Tetromino {
 		}
 	}
 
-	public void moveDown() {
+	public int moveDown() {
 		center.moveDown();
-		if (coincide()) {
+		if (coincide()) {	//他這邊吃的到coincide==true
+			//System.out.println("coincide");
 			center.moveUp();
+			return 1;
 		}
+		return 0;
 	}
+
 
 	public void moveRight() {
 		center.moveRight();
@@ -72,15 +76,22 @@ public abstract class Tetromino {
 	}
 
 	public boolean coincide() {
+		int buttom=0;
 		int[][] positions = getBlockPositions();
 		for (int[] position : positions) {
 			int x = position[0];
 			int y = position[1];
-			if (x == 0 || x == 9 || Tetris.wall.hasBlock(x, y)) {
+			//System.out.println(y);
+			if (x == 0 || x == 9 || Tetris.wall.hasBlock(x, y)|| y>17) {
+				//System.out.println("reach buttom");
 				return true;
 			}
+
 		}
+
+
 		return false;
+
 	}
 
 	public int getRotateTime() {
