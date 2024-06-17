@@ -6,10 +6,12 @@ import com.PD2.Tetris.block.Tetromino;
 import com.PD2.Tetris.block.Wall;
 import com.PD2.Tetris.block.Cell;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 import java.util.Timer;
 import java.util.TimerTask;
 
