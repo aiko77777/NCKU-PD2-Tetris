@@ -2,19 +2,20 @@ package com.PD2.Tetris.App;
 
 import com.PD2.Tetris.block.*;
 import com.PD2.Tetris.shape.*;
-import com.PD2.Tetris.Game.GameController;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
+import com.PD2.Tetris.Game.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
 
-public class Tetris extends JPanel {
+
+public class Tetris {
     // loading pictures
     public static BufferedImage I;
     public static BufferedImage J;
@@ -41,31 +42,18 @@ public class Tetris extends JPanel {
         }
     }
 
-    @Override
-    public void paint(Graphics g) {
-        g.drawImage(background, 0, 0, null);
-        // 平移坐标轴
-        g.translate(22, 15);
-        System.out.println("draw");
-    }
-
     public void start() {
     }
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.start_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("game start!!!");
-                menu.frame.dispose();
-                JFrame game_frame = new JFrame("NCKU Tetris");
-                GameController gameController = new GameController(game_frame);
-                game_frame.setSize(810, 940);
-                game_frame.add(gameController);
-                game_frame.setVisible(true);
-                gameController.start();
-            }
-        });
+		JFrame jframe = new JFrame("Tetris");
+		Demo panel = new Demo();
+		jframe.add(panel);
+        jframe.setVisible(true);
+        jframe.setSize(810, 940);
+        jframe.setLocationRelativeTo(null);
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        panel.start();
     }
 }
