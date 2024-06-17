@@ -102,4 +102,22 @@ public class Wall {
             }
         }
     }
+
+	@Override
+	public String toString() {
+		String result = "-----\n";
+        for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) {
+                if (wall[y][x] != null) {
+					result += "[ ]";
+                }
+				else {
+					result += "   ";
+				}
+            }
+			result += "\n";
+        }
+		result += "-----\n";
+		return result;
+	}
 }
