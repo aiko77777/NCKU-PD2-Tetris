@@ -38,17 +38,18 @@ public class Wall {
     }
 
     public int add(Tetromino t) {
+        System.out.println("add begin");
         int[][] blockPositions = t.getBlockPositions();
         boolean touchWall = false;
-
+        System.out.println("enter add");
 
 		// check if Tetromino touch the wall
         for (int[] position : blockPositions) {
             int x = position[0];
             int y = position[1];
-            System.out.println(y);
+            //System.out.println(y);
 
-            if (y == HEIGHT - 2 || hasBlock(x, y + 1)) {
+            if (y == HEIGHT - 2 || hasBlock(x, y +1)) {
                 System.out.println("touchwall!!!!");
 
                 touchWall = true;
@@ -68,8 +69,8 @@ public class Wall {
         for (int[] position : blockPositions) {
             int x = position[0];
             int y = position[1];
-            System.out.println("fill image_x"+x);
-            System.out.println("fill image_y"+y);
+            //System.out.println("fill image_x"+x);
+            //System.out.println("fill image_y"+y);
 
 
             wall[y][x] = image;
@@ -82,11 +83,14 @@ public class Wall {
         for (int y = HEIGHT - 1; y >= 0; y--) {
             if (isFull(y)) {
                 eliminateLineCount++;
+                System.out.println("isfull:"+y);
             } else {
                 temp[index--] = wall[y];
+                System.out.println("nonfull:"+y);
+
             }
         }
-
+        System.out.println("sqush");
 		// squash remain lines
         while (index >= 0) {
             temp[index--] = new BufferedImage[WIDTH];

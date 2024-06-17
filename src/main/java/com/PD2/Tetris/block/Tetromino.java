@@ -52,9 +52,11 @@ public abstract class Tetromino {
 
 	public int moveDown() {
 		center.moveDown();
+
 		if (coincide()) {	//他這邊吃的到coincide==true
 			//System.out.println("coincide");
 			center.moveUp();
+
 			return 1;
 		}
 		return 0;
@@ -80,11 +82,15 @@ public abstract class Tetromino {
 		for (int[] position : positions) {
 			int x = position[0];
 			int y = position[1];
-			System.out.println(x);
-			if (x == -1 || x == 9 || Tetris.wall.hasBlock(x, y)|| y==18) {
+			//System.out.println(x);
+			if (x == -1 || x == 9 || y==18 ) {
 				//System.out.println("reach buttom");
 				return true;
 			}
+			else if(Tetris.wall.hasBlock(x, y)){
+				return  true;
+			}
+
 
 		}
 

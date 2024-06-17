@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 
 public class Tetris extends JPanel implements  KeyListener{
     private Timer timer;
-    private final int delay = 200; // 每一秒触发一次
+    private final int delay = 500; // 每一秒触发一次
     private boolean isPaused;
     private boolean isOver=false;
     private Tetromino currentTetromino;
@@ -43,6 +43,7 @@ public class Tetris extends JPanel implements  KeyListener{
         timer=new Timer();
         isPaused=false;
         setFocusable(true);
+        scoreManager =new scoreEstimate();
         setFocusTraversalKeysEnabled(false);
         currentTetromino=Tetromino.random();
         addKeyListener(this);
@@ -97,15 +98,15 @@ public class Tetris extends JPanel implements  KeyListener{
     }
     public void spawnNewTetromino() {
 
-        if (wall.add(currentTetromino) == Wall.LOSE) {
-            currentTetromino=null;
-            endGame();
-        }
-        else {
+//        if (wall.add(currentTetromino) == Wall.LOSE) {
+//            currentTetromino=null;
+//            endGame();
+//        }
+//        else {
             currentTetromino = nextTetromino; // 当前方块变为下一个方块
             nextTetromino = Tetromino.random(); // 生成新的下一个方块
             repaint();
-        }
+//        }
 
     }
     public void dropCurrentTetromino() {
@@ -113,17 +114,29 @@ public class Tetris extends JPanel implements  KeyListener{
         if (currentTetromino != null) {
             //System.out.println(currentTetromino.coincide());
             check_boundary=currentTetromino.moveDown();     //因為movedown裡有coincide()-->moveup()，所以一旦撞到方塊或邊界，會先moveup()再進行line_104的判斷，currentTetromino.coincide永遠不會為true
-
+            System.out.println("dropcurrent");
             if (check_boundary==1) {
+                check_boundary=0;
                 System.out.println("reach buttom");
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
                     scoreManager.updateScore(linesCleared, 0); // 更新分数
-                }
-                holdUsed = false;
+                    spawnNewTetromino();
 
-                spawnNewTetromino();
+                }
+                else if(linesCleared ==Wall.LOSE){
+                    currentTetromino=null;
+                    endGame();
+                }
+                else {
+                    holdUsed = false;
+
+                    spawnNewTetromino();
+                }
+
+
             }
+
             repaint();
         }
     }
@@ -133,6 +146,7 @@ public class Tetris extends JPanel implements  KeyListener{
         wall.paint(g);
         if (currentTetromino != null) {
             currentTetromino.paint(g);
+            //System.out.println("paintcompo");
         }
         drawNextTetromino(g); // 绘制下一个方块
     }
@@ -156,10 +170,9 @@ public class Tetris extends JPanel implements  KeyListener{
             @Override
             public void run() {
                 if (!isPaused && !isOver) {
-                    System.out.println(isOver);
+                    //System.out.println(isOver);
                     dropCurrentTetromino();
                 }
-                System.out.println("timer");
             }
         }, 0, delay);
 
@@ -292,3 +305,5 @@ public class Tetris extends JPanel implements  KeyListener{
 //wall line7  width =9 from 10
 //Tetris 41 game_frame 改在class 裡面new 出來 這樣endGame()才能吃到game_frame
 //Tetris line 98~109 endGame時應該要把currentTetromino設為null，才能終止dropCurrentTetromino()的loop，以至於不會一直new出end_menu
+//Tetris line 99  line 124 :避免add呼叫兩次，setimage 兩次
+//Tetris line 124 一觸底時就要設置spawnNewTetromino();
