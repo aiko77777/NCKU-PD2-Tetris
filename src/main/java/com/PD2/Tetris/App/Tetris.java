@@ -37,6 +37,7 @@ public class Tetris {
             T = ImageIO.read(new File("img/T.png"));
             Z = ImageIO.read(new File("img/Z.png"));
             background = ImageIO.read(new File("img/background.png"));
+			wall = new Wall();
         } catch (IOException e) {
             e.printStackTrace();
         }
