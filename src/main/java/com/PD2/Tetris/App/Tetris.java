@@ -28,21 +28,21 @@ import java.util.Timer;
 
 public class Tetris extends JPanel implements  KeyListener{
     private Timer timer;
-    private final int delay = 500; // 每一秒触发一次
+    private final int delay = 500; 
     private boolean isPaused;
     private boolean isOver=false;
     private Tetromino currentTetromino;
-    private Tetromino nextTetromino; // 下一个方块
+    private Tetromino nextTetromino; 
 
     public static  Wall wall;
 
     private Tetromino holdTetromino;
     private boolean holdUsed;
     //private Wall wall;
-    private JFrame gameFrame; // 用于在游戏结束时关闭窗口
-    private scoreEstimate scoreManager; // 分数管理对象
+    private JFrame gameFrame; 
+    private scoreEstimate scoreManager; 
     Tetris(){
-        nextTetromino = Tetromino.random(); // 初始化下一个方块
+        nextTetromino = Tetromino.random(); 
         //wall=new Wall();
         gameFrame=new JFrame("NCKU Tetris");
         timer=new Timer();
@@ -97,9 +97,9 @@ public class Tetris extends JPanel implements  KeyListener{
     public void endGame() {
         // game over
         System.out.println("Game Over");
-        gameFrame.dispose(); // 关闭当前游戏窗口
+        gameFrame.dispose(); 
 
-        End_Menu end_menu=new End_Menu(scoreManager.getTotalScore()); // 显示结束菜单
+        End_Menu end_menu=new End_Menu(scoreManager.getTotalScore()); // 顯示結束
         end_menu.play_again_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -157,8 +157,8 @@ public class Tetris extends JPanel implements  KeyListener{
 //            endGame();
 //        }
 //        else {
-            currentTetromino = nextTetromino; // 当前方块变为下一个方块
-            nextTetromino = Tetromino.random(); // 生成新的下一个方块
+            currentTetromino = nextTetromino; 
+            nextTetromino = Tetromino.random(); 
             repaint();
 //        }
 
@@ -204,12 +204,12 @@ public class Tetris extends JPanel implements  KeyListener{
             currentTetromino.paint(g);
             //System.out.println("paintcompo");
         }
-        drawNextTetromino(g); // 绘制下一个方块
+        drawNextTetromino(g); 
     }
 
     public void drawNextTetromino(Graphics g) {
         if (nextTetromino != null) {
-            int offsetX = 400; // 设置下一个方块的显示位置
+            int offsetX = 400; 
             int offsetY = 50;
             int[][] blockPositions = nextTetromino.getBlockPositions();
             BufferedImage image = nextTetromino.getImage();
