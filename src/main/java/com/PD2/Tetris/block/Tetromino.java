@@ -83,7 +83,7 @@ public abstract class Tetromino {
 			int x = position[0];
 			int y = position[1];
 			//System.out.println(x);
-			if (x == -1 || x == 9 || y==18 ) {
+			if (x <= -1 || x >= 9 || y>=18 || y <=-1 ) {
 				//System.out.println("reach buttom");
 				return true;
 			}
