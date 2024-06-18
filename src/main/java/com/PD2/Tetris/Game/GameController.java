@@ -6,8 +6,12 @@ import com.PD2.Tetris.block.Tetromino;
 import com.PD2.Tetris.block.Wall;
 import com.PD2.Tetris.block.Cell;
 
+
+
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -15,7 +19,10 @@ import java.awt.Graphics;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+
 public class GameController extends JPanel implements KeyListener {
+
     private Timer timer;
     private boolean isPaused;
     private final int delay = 1000; // 每一秒触发一次
@@ -66,6 +73,7 @@ public class GameController extends JPanel implements KeyListener {
         if (currentTetromino != null) {
             currentTetromino.moveDown();
             if (currentTetromino.coincide()) {
+
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
                     scoreManager.updateScore(linesCleared, 0); // 更新分数
@@ -103,7 +111,7 @@ public class GameController extends JPanel implements KeyListener {
             while (!currentTetromino.coincide()) {
                 currentTetromino.moveDown();
             }
-            currentTetromino.moveUp();
+            //currentTetromino.moveUp();
             int linesCleared = wall.add(currentTetromino);
             if (linesCleared > 0) {
                 
@@ -190,6 +198,7 @@ public class GameController extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {}
 
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -213,4 +222,5 @@ public class GameController extends JPanel implements KeyListener {
             }
         }
     }
+
 }
