@@ -56,14 +56,14 @@ public class scoreEstimate {
                 if((totalScore < 500)){
                     totalScore += scoresPoolSpeed1[lines];
                     totalLine += lines;
-                    speed = 600-totalScore/6;
+                    speed = 600-totalScore/10;
                 }
-                else if((totalScore >= 500 && totalScore<2000)){
+                else if((totalScore >= 500 && totalScore < 2000)){
                     totalScore += scoresPoolSpeed2[lines];
                     totalLine += lines;
-                    speed = 550 - totalScore/8;
+                    speed = 550 - totalScore/10;
                 }
-                else if((totalScore >= 2000)){
+                else if((totalScore >= 2000 && totalScore < 2500)){
                     totalScore += scoresPoolSpeed3[lines];
                     totalLine += lines;
                     speed = 550 - totalScore/10;
@@ -71,53 +71,56 @@ public class scoreEstimate {
                         speed = 250;
                     }
                 }
-            }
-        }
-        else if(mode == 1){//扣分模式
-            if(totalScore > 0){
-                totalScore = totalScore - 2;
-            }
-            if (lines >= 0 && lines < scorePoolLength) {
-                if(totalScore > 0 && lines > 0){
-                    totalScore = totalScore + 2;
+                if(totalScore >= 2500){
+                    totalScore = totalScore - 2;
                 }
-
-                if((totalScore < 500)){
-                    totalScore += scoresPoolSpeed1[lines];
-                    totalLine += lines;
-                    speed = 600 - totalScore/6;
+                if (lines >= 0 && lines < scorePoolLength) {
+                    if(totalScore > 2500 && lines > 0){
+                        totalScore = totalScore + 2;
+                    }
+        
+                    if((totalScore >= 2500 && totalScore < 3500)){
+                        totalScore += scoresPoolSpeed1[lines];
+                        totalLine += lines;
+                        speed = 550 - totalScore/15;
+                    }
+                    else if((totalScore >= 3500 && totalScore < 4500)){
+                        totalScore += scoresPoolSpeed2[lines];
+                        totalLine += lines;
+                        speed = 550 - totalScore/15;
+                        if(speed <= 200){
+                            speed = 200;
+                        }
+                    }
+                    else if((totalScore >= 4500 && totalScore < 5500)){
+                        totalScore += scoresPoolSpeed3[lines];
+                        totalLine += lines;
+                        speed = 530 - totalScore/10;
+                        if(speed <= 200){
+                            speed = 200;
+                        }
+                    }
                 }
-                else if((totalScore >= 500 && totalScore < 1500)){
-                    totalScore += scoresPoolSpeed2[lines];
-                    totalLine += lines;
-                    speed = 500 - totalScore/8;
-                }
-                else if((totalScore >= 1500)){
-                    totalScore += scoresPoolSpeed3[lines];
-                    totalLine += lines;
-                    speed = 450-totalScore/10;
-                    if(speed<=200){
-                        speed = 200;
+                //隨機速度模式
+                if(totalScore >= 5500){
+                    speed = (int)(Math.random()*(500 - 300 + 1)) + 300;
+                    if (lines >= 0 && lines < scorePoolLength) {
+                        if((speed >= 400)){
+                            totalScore += scoresPoolSpeed1[lines];
+                            totalLine += lines;
+                        }
+                        else if(speed >= 350 && speed < 400){
+                            totalScore += scoresPoolSpeed2[lines];
+                            totalLine += lines;
+                        }
+                        else if(speed < 350){
+                            totalScore += scoresPoolSpeed3[lines];
+                            totalLine += lines;
+                        }
                     }
                 }
             }
         }
-        else if(mode==2){//隨機速度模式
-            speed = (int)(Math.random()*(500 - 200 + 1)) + 200;
-            if (lines >= 0 && lines < scorePoolLength) {
-                if((speed >= 300)){
-                    totalScore += scoresPoolSpeed1[lines];
-                    totalLine += lines;
-                }
-                else if(speed >= 250 && speed < 300){
-                    totalScore += scoresPoolSpeed2[lines];
-                    totalLine += lines;
-                }
-                else if(speed < 250){
-                    totalScore += scoresPoolSpeed3[lines];
-                    totalLine += lines;
-                }
-            }
-        }
+       
     }
 }
