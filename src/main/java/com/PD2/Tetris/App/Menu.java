@@ -72,7 +72,7 @@ public class Menu {
 //             @Override
 //             public void actionPerformed(ActionEvent actionEvent) {
 //                 System.out.println("click start");
-//                 new Tetris().startGame(); // 启动游戏
+//                 new Tetris().startGame(); 
 //             }
 //         });
 
