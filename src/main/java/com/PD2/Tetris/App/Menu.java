@@ -15,7 +15,7 @@ public class Menu {
     Font game_title_font = new Font(null, Font.PLAIN, 100);
     Font button_font = new Font(null, Font.PLAIN, 30);
 
-    ImageIcon icon = new ImageIcon("src/main/java/com/PD2/Tetris/image/UI_image/intro_icon.png");
+    ImageIcon icon = new ImageIcon("img/UI_image/intro_icon.png");
 
     public Menu() {
         Color backgroundColor = Color.black; //背景顏色
