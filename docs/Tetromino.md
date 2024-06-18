@@ -33,6 +33,11 @@ currentTetromino.moveDown();
 currentTetromino.moveRight();
 currentTetromino.rotate();
 ```
+### `public boolean`
+
+### `coincide()`
+
+### Return if the Tetromino is out of bound or coincide to the wall
 
 ### `public BufferedImage`
 
