@@ -174,7 +174,7 @@ public class Tetris extends JPanel implements  KeyListener{
                 System.out.println("reach buttom");
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
-                    scoreManager.updateScore(linesCleared, 0); // 更新分数
+                    scoreManager.updateScore(linesCleared, 0); // 更新分數
                     spawnNewTetromino();
                     System.out.println("score:"+scoreManager.getTotalScore());
 
