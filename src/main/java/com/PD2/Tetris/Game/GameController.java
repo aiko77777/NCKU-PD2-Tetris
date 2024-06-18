@@ -25,14 +25,14 @@ public class GameController extends JPanel implements KeyListener {
 
     private Timer timer;
     private boolean isPaused;
-    private final int delay = 1000; // 每一秒触发一次
+    private final int delay = 1000; 
     private Tetromino currentTetromino;
-    private Tetromino nextTetromino; // 下一个方块
+    private Tetromino nextTetromino; 
     private Tetromino holdTetromino;
     private boolean holdUsed;
     private Wall wall;
-    private JFrame gameFrame; // 用于在游戏结束时关闭窗口
-    private scoreEstimate scoreManager; // 分数管理对象
+    private JFrame gameFrame; 
+    private scoreEstimate scoreManager;
 
     public GameController(JFrame frame) {
         this.gameFrame = frame; 
@@ -40,11 +40,11 @@ public class GameController extends JPanel implements KeyListener {
         isPaused = false;
         holdUsed = false;
         wall = new Wall();
-        scoreManager = new scoreEstimate(); // 初始化分数管理对象
+        scoreManager = new scoreEstimate(); 
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        nextTetromino = Tetromino.random(); // 初始化下一个方块
+        nextTetromino = Tetromino.random(); 
     }
 
     public void start() {
@@ -61,8 +61,8 @@ public class GameController extends JPanel implements KeyListener {
     }
 
     public void spawnNewTetromino() {
-        currentTetromino = nextTetromino; // 当前方块变为下一个方块
-        nextTetromino = Tetromino.random(); // 生成新的下一个方块
+        currentTetromino = nextTetromino; 
+        nextTetromino = Tetromino.random(); 
         if (wall.add(currentTetromino) == Wall.LOSE) {
             endGame();
         }
@@ -76,7 +76,7 @@ public class GameController extends JPanel implements KeyListener {
 
                 int linesCleared = wall.add(currentTetromino);
                 if (linesCleared > 0) {
-                    scoreManager.updateScore(linesCleared, 0); // 更新分数
+                    scoreManager.updateScore(linesCleared, 0); // 更新分數
                 }
                 holdUsed = false;
                 spawnNewTetromino();
@@ -151,8 +151,8 @@ public class GameController extends JPanel implements KeyListener {
     public void endGame() {
         // 游戏结束逻辑
         System.out.println("Game Over");
-        gameFrame.dispose(); // 关闭当前游戏窗口
-        // new End_Menu(); // 显示结束菜单
+        gameFrame.dispose(); //關閉遊戲
+        // new End_Menu(); // 結束menu
     }
 
     @Override
@@ -176,7 +176,6 @@ public class GameController extends JPanel implements KeyListener {
                 rotateCurrentTetromino();
                 break;
             case KeyEvent.VK_SPACE:
-                // 硬降代码
                 // hardDropCurrentTetromino();
                 break;
             case KeyEvent.VK_C:
@@ -206,12 +205,12 @@ public class GameController extends JPanel implements KeyListener {
         if (currentTetromino != null) {
             currentTetromino.paint(g);
         }
-        drawNextTetromino(g); // 绘制下一个方块
+        drawNextTetromino(g); 
     }
 
     public void drawNextTetromino(Graphics g) {
         if (nextTetromino != null) {
-            int offsetX = 400; // 设置下一个方块的显示位置
+            int offsetX = 400; 
             int offsetY = 50;
             int[][] blockPositions = nextTetromino.getBlockPositions();
             BufferedImage image = nextTetromino.getImage();
