@@ -2,12 +2,15 @@ package com.PD2.Tetris.App;
 
 import com.PD2.Tetris.block.*;
 import com.PD2.Tetris.shape.*;
+
 //import com.PD2.Tetris.Game.GameController;
 import com.PD2.Tetris.block.Tetromino;
 
+import com.PD2.Tetris.Game.*;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -19,7 +22,7 @@ import java.awt.image.BufferedImage;
 import java.util.TimerTask;
 import java.util.Timer;
 
-import javax.imageio.ImageIO;
+
 
 public class Tetris extends JPanel implements  KeyListener{
     private Timer timer;
@@ -48,6 +51,7 @@ public class Tetris extends JPanel implements  KeyListener{
         currentTetromino=Tetromino.random();
         addKeyListener(this);
     }
+
     // loading pictures
     public static BufferedImage I;
     public static BufferedImage J;
@@ -234,8 +238,6 @@ public class Tetris extends JPanel implements  KeyListener{
         spawnNewTetromino();
     }
 
-
-
     @Override
     public void paint(Graphics g) {
         g.drawImage(background, 0, 0, null);
@@ -268,6 +270,7 @@ public class Tetris extends JPanel implements  KeyListener{
             repaint();
         }
     }
+
     public void pause() {
         isPaused = true;
         timer.cancel();
