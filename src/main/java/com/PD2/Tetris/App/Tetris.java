@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;

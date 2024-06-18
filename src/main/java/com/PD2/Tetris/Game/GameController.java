@@ -152,7 +152,7 @@ public class GameController extends JPanel implements KeyListener {
         // 游戏结束逻辑
         System.out.println("Game Over");
         gameFrame.dispose(); // 关闭当前游戏窗口
-        new End_Menu(); // 显示结束菜单
+        // new End_Menu(); // 显示结束菜单
     }
 
     @Override
