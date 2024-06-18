@@ -4,6 +4,10 @@
 
 Tetris game written in java, 2024 NCKU PD2 final project
 
+## Documentation
+[Tetromino class](docs/Tetromino.md)
+[Wall class](docs/Wall.md)
+
 ## Dependencies
 [Java 11+](https://www.oracle.com/tw/java/technologies/downloads/)
 
